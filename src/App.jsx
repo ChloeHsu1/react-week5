@@ -79,6 +79,7 @@ function App() {
       })
 
       getCart();
+      closeModal();
     } catch (error) {
       alert('加入購物車失敗')
     } finally {
@@ -143,7 +144,6 @@ function App() {
 
   // 送出表單
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     const { message, ...user } = data;
 
     const userInfo = {
@@ -162,6 +162,7 @@ function App() {
     try {
       await axios.post(`${BASE_URL}/v2/api/${API_PATH}/order`, data)
       reset()
+      getCart()
     } catch (error) {
       alert('結帳失敗')
     } finally {
@@ -409,7 +410,7 @@ function App() {
                 }
               })}
               id="tel"
-              type="text"
+              type="tel"
               className={`form-control ${errors.tel && 'is-invalid'}`}
               placeholder="請輸入電話"
             />
